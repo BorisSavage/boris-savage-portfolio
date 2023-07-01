@@ -1,91 +1,221 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import styles from './page.module.css'
+"use client";
 
-const inter = Inter({ subsets: ['latin'] })
+import About from "@/components/About";
+import BlobBackground from "@/components/BlobBackground";
+import ContactMe from "@/components/ContactMe";
+import Experience from "@/components/Experience";
+import GoldenSpiral from "@/components/GoldenSpiral";
+import Header from "@/components/Header";
+import Hero from "@/components/Hero";
+import Projects from "@/components/Projects";
+import Section from "@/components/Section";
+import Skills from "@/components/Skills";
+import VerticalCarousel from "@/components/VerticalCarousel";
+import useThrottle from "@/hooks/useThrottle";
+import {
+  Dispatch,
+  SetStateAction,
+  createContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
-export default function Home() {
+interface PageScrollContextType {
+  pageScroll: boolean;
+  setPageScroll: Dispatch<SetStateAction<boolean>>;
+}
+
+const PageScrollContext = createContext<PageScrollContextType>({
+  pageScroll: false,
+  setPageScroll: () => {
+    return;
+  },
+});
+export { PageScrollContext };
+
+type IsLastIndexContextProps = {
+  isLastIndex: boolean;
+  setIsLastIndex: Dispatch<SetStateAction<boolean>>;
+};
+
+const IsLastIndexContext = createContext<IsLastIndexContextProps>({
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  isLastIndex: false,
+  setIsLastIndex: () => {
+    return;
+  },
+});
+
+export { IsLastIndexContext };
+
+export default function Page() {
+  const heroRef = useRef(null);
+  const aboutRef = useRef(null);
+  const experienceRef = useRef(null);
+  const skillsRef = useRef(null);
+  const projectsRef = useRef(null);
+  const contactRef = useRef(null);
+
+  const pageRef = useRef(null);
+  const [triggerAnimate, setTriggerAnimate] = useState(false);
+  const blobRef = useRef<HTMLDivElement>(null);
+
+  const [isCardSection, setIsCardSection] = useState(false);
+
+  const [pageScroll, setPageScroll] = useState(true);
+
+  const [isLastIndex, setIsLastIndex] = useState(false);
+
+  const handleMove = ({
+    clientX,
+    clientY,
+  }: {
+    clientX: number;
+    clientY: number;
+  }) => {
+    if (blobRef.current) {
+      blobRef.current.animate(
+        {
+          left: `${clientX}px`,
+          top: `${clientY}px`,
+        },
+        {
+          duration: isCardSection ? 1000 : 3000,
+          fill: "forwards",
+          easing: "cubic-bezier(.2,.8,.2,1)",
+        }
+      );
+    }
+  };
+
+  const handleTouchMove = (event: React.TouchEvent<HTMLDivElement>) => {
+    const touch = event.touches[0];
+    handleMove(touch);
+  };
+
+  const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
+    handleMove(event);
+  };
+
+  // const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+  //   handleMove(event);
+  // };
+
+  useEffect(() => {
+    const refs = [
+      heroRef,
+      aboutRef,
+      experienceRef,
+      skillsRef,
+      projectsRef,
+      contactRef,
+    ];
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            setTriggerAnimate((prevState) => !prevState);
+          }
+          if (
+            entry.target === experienceRef.current ||
+            entry.target === projectsRef.current ||
+            entry.target === contactRef.current
+          ) {
+            setIsCardSection(entry.isIntersecting);
+          }
+        });
+      },
+      { threshold: 1 }
+    );
+
+    refs.forEach((ref) => {
+      if (ref.current) {
+        observer.observe(ref.current);
+      }
+    });
+
+    return () => {
+      refs.forEach((ref) => {
+        if (ref.current) {
+          observer.unobserve(ref.current);
+        }
+      });
+    };
+  }, []);
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
+    <>
+      <BlobBackground dimBlob={isCardSection} blobRef={blobRef} />
+      <GoldenSpiral triggerAnimate={triggerAnimate} />
+
+      <div
+        //onTouchStart={handleTouchMove}
+        onTouchMove={useThrottle(handleTouchMove)}
+        onMouseMove={useThrottle(handleMouseMove)}
+        //onPointerEnter={handlePointerMove}
+        //onPointerMove={useThrottle(handlePointerMove)}
+        ref={pageRef}
+        // className="relative z-0 h-screen overflow-x-hidden overflow-y-scroll bg-transparent text-white scrollbar-thin scrollbar-track-mossy_glen-500/25 scrollbar-thumb-mossy_glen-300/50 scrollbar-track-rounded-full scrollbar-thumb-rounded-full"
+        className="relative z-0 h-screen overflow-hidden bg-transparent text-white"
+      >
+        {/* <p className="middle"></p> */}
+        <PageScrollContext.Provider value={{ pageScroll, setPageScroll }}>
+          <IsLastIndexContext.Provider value={{ isLastIndex, setIsLastIndex }}>
+            <Header />
+            <VerticalCarousel>
+              <Section id="hero" grab>
+                <div
+                  ref={heroRef}
+                  className="absolute top-1/2 h-[80%] w-full -translate-y-1/2"
+                />
+                <Hero />
+              </Section>
+
+              <Section id="about">
+                <div
+                  ref={aboutRef}
+                  className="absolute top-1/2 h-[80%] w-full -translate-y-1/2 "
+                />
+                <About />
+              </Section>
+
+              <Section id="experience" turnOffDots={isCardSection}>
+                <div
+                  ref={experienceRef}
+                  className="absolute top-1/2 h-[80%] w-full -translate-y-1/2"
+                />
+                <Experience />
+              </Section>
+
+              <Section id="skills">
+                <div
+                  ref={skillsRef}
+                  className="absolute top-1/2 h-[80%] w-full -translate-y-1/2 "
+                />
+                <Skills />
+              </Section>
+
+              <Section id="projects" turnOffDots={isCardSection}>
+                <div
+                  ref={projectsRef}
+                  className="absolute top-1/2 h-[80%] w-full -translate-y-1/2 "
+                />
+                <Projects />
+              </Section>
+
+              <Section id="contact">
+                <div
+                  ref={contactRef}
+                  className="absolute top-1/2 h-[80%] w-full -translate-y-1/2 "
+                />
+                <ContactMe />
+              </Section>
+            </VerticalCarousel>
+          </IsLastIndexContext.Provider>
+        </PageScrollContext.Provider>
       </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-        <div className={styles.thirteen}>
-          <Image src="/thirteen.svg" alt="13" width={40} height={31} priority />
-        </div>
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://beta.nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+    </>
+  );
 }
