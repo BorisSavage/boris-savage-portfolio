@@ -188,7 +188,8 @@ export const PrevButton: React.FC<PrevNextButtonPropType> = ({
   return (
     <button
       className={cn(
-        "group absolute left-4 top-1/2 -translate-y-1/2 overflow-hidden rounded-bl-sm rounded-br-3xl rounded-tl-3xl rounded-tr-sm bg-gradient-to-bl from-mossy_glen-950/5 via-mossy_glen-950/20 to-mossy_glen-950/5 transition duration-[500ms] ease-out",
+        "group absolute left-4 top-[16%] -translate-y-1/2 overflow-hidden rounded-bl-sm rounded-br-3xl rounded-tl-3xl rounded-tr-sm bg-gradient-to-bl from-mossy_glen-950/5 via-mossy_glen-950/20 to-mossy_glen-950/5 transition duration-[500ms] ease-out",
+        "sm:top-1/2",
         "lg:left-[12.5%]",
         "xl:left-[20%]",
         { "opacity-20": !enabled },
@@ -220,7 +221,7 @@ export const PrevButton: React.FC<PrevNextButtonPropType> = ({
         {" "}
         <ChevronLeftIcon
           className={cn(
-            "h-8 w-8 text-misty_mountains-500 drop-shadow transition duration-[500ms] ease-out sm:h-16 sm:w-16",
+            "h-10 w-10 text-misty_mountains-500 drop-shadow transition duration-[500ms] ease-out sm:h-16 sm:w-16",
             "group-hover:text-misty_mountains-300",
             {
               [cn(
@@ -243,7 +244,8 @@ export const NextButton: React.FC<PrevNextButtonPropType> = ({
   return (
     <button
       className={cn(
-        "group absolute right-4 top-1/2 -translate-y-1/2 overflow-hidden rounded-bl-3xl rounded-br-sm rounded-tl-sm rounded-tr-3xl bg-gradient-to-br from-mossy_glen-950/5 via-mossy_glen-950/20 to-mossy_glen-950/5 transition duration-[500ms] ease-out",
+        "group absolute right-4 top-[16%] -translate-y-1/2 overflow-hidden rounded-bl-3xl rounded-br-sm rounded-tl-sm rounded-tr-3xl bg-gradient-to-br from-mossy_glen-950/5 via-mossy_glen-950/20 to-mossy_glen-950/5 transition duration-[500ms] ease-out",
+        "sm:top-1/2",
         "lg:right-[12.5%]",
         "xl:right-[20%]",
         { "opacity-20": !enabled },
@@ -275,7 +277,7 @@ export const NextButton: React.FC<PrevNextButtonPropType> = ({
         {" "}
         <ChevronRightIcon
           className={cn(
-            "h-8 w-8 text-sunlit_meadow-500 drop-shadow transition duration-[500ms] ease-out sm:h-16 sm:w-16",
+            "h-10 w-10 text-sunlit_meadow-500 drop-shadow transition duration-[500ms] ease-out sm:h-16 sm:w-16",
 
             "group-hover:text-sunlit_meadow-300",
             {

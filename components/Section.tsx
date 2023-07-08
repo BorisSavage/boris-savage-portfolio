@@ -39,7 +39,8 @@ export default function Section({
               "radial-gradient(rgba(58,139,82, 0.2) 1px, transparent 1px)",
             backgroundPosition: "0% 0%",
             backgroundSize: "20px 20px",
-            transform: `translate(0%, ${parallaxTweenValue * 5.173}%)`,
+            // transform: `translate(0%, ${parallaxTweenValue * 5.173}%)`,
+            transform: `translate(0%, ${parallaxTweenValue * 0.618}%)`,
           }}
           className="absolute -inset-y-[30.9%] inset-x-0"
         ></div>

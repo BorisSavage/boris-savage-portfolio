@@ -134,7 +134,11 @@ export default function Carousel({
             })}
           </div>
         </div>
-        <div className="group relative mx-auto w-fit rounded-bl-sm rounded-br-full rounded-tl-full rounded-tr-sm">
+        <div
+          className={cn(
+            "group absolute bottom-5 left-1/2 w-fit -translate-x-1/2 rounded-bl-sm rounded-br-full rounded-tl-full rounded-tr-sm"
+          )}
+        >
           <div
             className={cn(
               "absolute -inset-0.5 animate-tilt rounded-bl-3xl rounded-br-sm rounded-tl-sm rounded-tr-3xl bg-gradient-to-r from-sunlit_meadow-300 via-mossy_glen-300 to-misty_mountains-500 opacity-0 blur-sm transition duration-[2000ms] ease-savage-sig-2",
@@ -147,7 +151,7 @@ export default function Carousel({
           ></div>
           <div
             className={cn(
-              "group relative flex h-6 w-fit items-center justify-center space-x-1 rounded-bl-3xl rounded-br-sm rounded-tl-sm rounded-tr-3xl bg-mossy_glen-950 bg-opacity-20 px-3 transition  duration-[2000ms] ease-savage-sig-2",
+              "group relative hidden h-6 w-fit items-center justify-center space-x-1 rounded-bl-3xl rounded-br-sm rounded-tl-sm rounded-tr-3xl bg-mossy_glen-950 bg-opacity-20 px-3 transition duration-[2000ms]  ease-savage-sig-2 sm:flex",
               "group-hover:bg-opacity-100 group-hover:duration-[500ms]",
               {
                 "rounded-bl-sm rounded-br-3xl rounded-tl-3xl rounded-tr-sm":

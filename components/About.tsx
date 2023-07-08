@@ -3,25 +3,26 @@ import caveStanding from "@/public/caveStanding.webp";
 import johnOGroats from "@/public/johnOGroats.webp";
 import victoryPose from "@/public/victoryPose.webp";
 import profilePic from "@/public/profilePic.webp";
-import { motion, useAnimate, useInView } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/cn";
 import useScrollHandler from "@/hooks/useScrollHandler";
+import { Balancer } from "react-wrap-balancer";
 
 const pictures = [
   caveStanding,
   undefined,
-  victoryPose,
-  caveSitting,
-  johnOGroats,
-  caveStanding,
   profilePic,
+  caveSitting, //start
   victoryPose,
-  caveSitting,
-  johnOGroats,
   caveStanding,
+  johnOGroats,
   profilePic,
+  caveSitting,
+  victoryPose,
+  caveStanding,
+  johnOGroats,
 ];
 
 export default function About() {
@@ -31,31 +32,50 @@ export default function About() {
 
   const [hasRun, setHasRun] = useState(false);
 
-  const [animateRef] = useAnimate();
-  const isInView = useInView(animateRef, { amount: 1 });
+  const animateRef = useRef(null);
+  const isInView = useInView(animateRef, { amount: 0.2 });
 
-  const { scrollRef, isCarouselScrolling } = useScrollHandler();
+  //const { scrollRef, isCarouselScrolling } = useScrollHandler();
 
   const indexRef = useRef(3);
 
   const handleAnimationStart = () => {
-    if (isAnimating === false) {
+    if (!isAnimating) {
+      console.log("HANDLE ANIME START");
       setIsAnimating(true);
-      setHasRun(true);
+      // setTimer(-(timer - Date.now()));
+      // console.log("TIME SINCE LAST RUN: ");
       indexRef.current < pictures.length - 1
         ? (indexRef.current = indexRef.current + 2)
         : (indexRef.current = 3);
     }
   };
 
+  const handlePointerEnter = () => {
+    if (hasRun) handleAnimationStart();
+  };
+
+  // useEffect(() => {
+  //   if (!hasRun && !isAnimating && isInView) {
+  //     setTimeout(() => {
+  //       if (!hasRun) {
+  //         handleAnimationStart();
+  //       }
+  //     }, 1050);
+  //   }
+  // }, [isInView]);
+
   useEffect(() => {
-    if (!hasRun && isInView) {
+    if (isInView && !hasRun) {
       setTimeout(() => {
-        if (!hasRun) {
+        if (isInView && !hasRun) {
+          console.log("USE EFFEC CAUSED BELOW:");
           handleAnimationStart();
+          setHasRun(true);
         }
       }, 1000);
     }
+    if (!isInView && hasRun) setHasRun(false);
   }, [isInView]);
 
   return (
@@ -64,12 +84,12 @@ export default function About() {
       whileInView={{ opacity: 1 }}
       transition={{ duration: 1.5 }}
       className={cn(
-        "relative mx-auto flex h-screen max-w-7xl flex-col items-center justify-center p-2 pt-20",
-        "xs:space-y-5 xs:p-5 xs:pt-10",
-        "md:grid md:grid-cols-2"
+        "relative mx-auto flex h-screen max-w-7xl flex-col items-center justify-center pt-6",
+        "sm:space-y-5 sm:p-5 sm:pt-10",
+        "lg:grid lg:grid-cols-2"
       )}
     >
-      <h3 className="absolute left-1/2 top-14 z-10 -translate-x-1/2 pl-[20px] text-2xl uppercase tracking-[20px] text-mossy_glen-100 drop-shadow-lg xs:top-16">
+      <h3 className="absolute left-1/2 top-4 z-10 -translate-x-1/2 pl-[20px] text-2xl uppercase tracking-[20px] text-mossy_glen-100 drop-shadow-lg sm:top-16">
         About
       </h3>
 
@@ -80,31 +100,37 @@ export default function About() {
           opacity: 0,
         }}
         transition={{
-          duration: 1.2,
+          duration: 1,
+          ease: [0.2, 0.8, 0.2, 1],
         }}
         whileInView={{
           opacity: 1,
           x: 0,
         }}
-        viewport={{
-          once: true,
-        }}
+        viewport={
+          {
+            // once: true,
+          }
+        }
       >
         <div className="group relative h-fit md:rounded-bl-sm md:rounded-br-[3rem] md:rounded-tl-[3rem] md:rounded-tr-sm">
           <div
             className={cn(
               "absolute -inset-0.5 animate-slight_tilt rounded-full bg-gradient-to-bl from-sunlit_meadow-300 via-mossy_glen-900 to-misty_mountains-500 blur-md",
-              "md:rounded-none"
+              "lg:rounded-none"
             )}
           ></div>
           <div
             ref={animateRef}
-            onPointerEnter={() => handleAnimationStart()}
-            onAnimationEnd={() => setIsAnimating(false)}
+            onPointerEnter={() => handlePointerEnter()}
+            onAnimationEnd={() => {
+              setIsAnimating(false);
+            }}
             className={cn(
-              "relative grid h-56 w-56 grid-cols-1 overflow-hidden rounded-full",
-              "md:h-96 md:w-64 md:rounded-bl-sm md:rounded-br-[3rem] md:rounded-tl-[3rem] md:rounded-tr-sm",
-              "lg:h-[480px] lg:w-[400px]",
+              "relative grid h-36 w-36 grid-cols-1 overflow-hidden rounded-full",
+              "sm:h-60 sm:w-60",
+              "md:h-80 md:w-80",
+              "lg:h-[480px] lg:w-[400px] lg:rounded-bl-sm lg:rounded-br-[3rem] lg:rounded-tl-[3rem] lg:rounded-tr-sm",
               "xl:h-[600px] xl:w-[500px]"
             )}
           >
@@ -114,8 +140,9 @@ export default function About() {
                 <div
                   key={index}
                   className={cn(
-                    "relative col-start-1 row-start-1 flex h-56 w-56 flex-col items-center justify-center",
-                    "md:h-96 md:w-64",
+                    "relative col-start-1 row-start-1 flex h-36 w-36 flex-col items-center justify-center",
+                    "sm:h-60 sm:w-60",
+                    "md:h-80 md:w-80",
                     "lg:h-[480px] lg:w-[400px]",
                     "xl:h-[600px] xl:w-[500px]"
                   )}
@@ -165,22 +192,27 @@ export default function About() {
       <div className="flex items-center justify-center">
         <div
           className={cn(
-            "flex flex-col items-center justify-center space-y-0 px-0 md:mr-0 lg:w-[400px] xl:mr-0 xl:w-[500px]",
-            "md:mb-0 md:items-start md:space-y-10"
+            "flex flex-col items-center justify-center space-y-0 px-0",
+            "sm:space-y-5",
+            "md:items-start",
+            "lg:w-[400px]",
+            "xl:w-[500px]"
           )}
         >
           <h4
             className={cn(
-              "w-fit rounded-full bg-gradient-to-b from-transparent via-mossy_glen-950/20 to-transparent px-2 pb-[15px] pt-2 text-center text-4xl font-semibold tracking-wide drop-shadow-lg"
-              //"md:text-left"
+              "w-fit rounded-full bg-gradient-to-b from-transparent via-mossy_glen-950/20 to-transparent px-2 py-2 text-center text-2xl font-semibold tracking-wide drop-shadow-lg",
+              "sm:text-4xl",
+              "lg:bg-gradient-to-r",
+              "xl:bg-gradient-to-b"
             )}
           >
             Here is a{" "}
             <span
               className={cn("underline transition", {
-                "decoration-mossy_glen-100/25 duration-[1000ms] ease-in":
+                "decoration-sunlit_meadow-300 duration-[500ms] ease-in":
                   isPointing,
-                "decoration-transparent duration-[3000ms] ease-out":
+                "decoration-misty_mountains-500 duration-[1500ms] ease-out":
                   !isPointing,
               })}
             >
@@ -221,32 +253,25 @@ export default function About() {
             ></div>
             <div
               className={cn(
-                `relative overflow-hidden rounded-bl-sm rounded-br-3xl rounded-tl-3xl rounded-tr-sm bg-gradient-to-br from-mossy_glen-950/60 via-transparent to-mossy_glen-950/60 px-2 py-2 tracking-wide transition`,
-                {
-                  [cn(
-                    "text-white duration-[500ms] ease-in",
-                    "sm:duration-[1000ms]"
-                  )]: isPointing,
-                  [cn(
-                    "text-mossy_glen-50 duration-[333ms] ease-out",
-                    "sm:duration-[667ms]"
-                  )]: !isPointing,
-                }
+                `relative overflow-hidden rounded-bl-sm rounded-br-xl rounded-tl-xl rounded-tr-sm bg-gradient-to-br from-mossy_glen-950/80 via-transparent to-mossy_glen-950/80 px-5 py-1`,
+                "sm:rounded-br-3xl sm:rounded-tl-3xl"
               )}
             >
               <div
-                ref={scrollRef}
+                //ref={scrollRef}
                 className={cn(
-                  "relative max-h-[33vh] overflow-auto pl-2 pr-1 text-justify transition duration-300 ease-in-out scrollbar scrollbar-w-1",
-                  "sm:pr-2",
-                  "md:max-h-[31vh]",
-                  "xl:max-h-[50vh]",
-                  {
-                    "scrollbar-track-mossy_glen-500/0 scrollbar-thumb-mossy_glen-500/0":
-                      isCarouselScrolling,
-                    "scrollbar-track-mossy_glen-500/10 scrollbar-thumb-mossy_glen-500/20":
-                      !isCarouselScrolling,
-                  }
+                  // "max-h-[40dvh]",
+                  "relative overflow-auto text-justify scrollbar scrollbar-w-1"
+
+                  // "sm:pr-2",
+                  // "md:max-h-[40dvh]",
+                  // "xl:max-h-[40dvh]",
+                  // {
+                  //   "scrollbar-track-mossy_glen-500/0 scrollbar-thumb-mossy_glen-500/0":
+                  //     isCarouselScrolling,
+                  //   "scrollbar-track-mossy_glen-500/10 scrollbar-thumb-mossy_glen-500/20":
+                  //     !isCarouselScrolling,
+                  // }
                 )}
               >
                 <p
@@ -254,50 +279,74 @@ export default function About() {
                   onTouchMove={() => setIsPointing(true)}
                   onPointerLeave={() => setIsPointing(false)}
                   onTouchEnd={() => setIsPointing(false)}
-                  className="text-sm drop-shadow sm:text-base"
+                  className={cn(
+                    "bg-gradient-to-br from-sunlit_meadow-300/100 via-white/100 to-misty_mountains-500/100 bg-clip-text text-sm drop-shadow",
+                    "sm:text-base",
+                    {
+                      [cn(
+                        "text-white/0 duration-[500ms] ease-in-out",
+                        "sm:duration-[1000ms]"
+                      )]: isPointing,
+                      [cn(
+                        "text-white/100 duration-[333ms] ease-out",
+                        "sm:duration-[667ms]"
+                      )]: !isPointing,
+                    }
+                  )}
                 >
-                  I Graduated in{" "}
-                  <span className="font-bold">
-                    Forensic Chemistry and Toxicology
-                  </span>{" "}
-                  (wild, I know) with a bachelor&apos;s degree and{" "}
-                  <span className="font-bold">Computer Science</span> with an
-                  engineer&apos;s degree. I started coding over three years ago
-                  and already have a year of professional experience as a web
-                  developer. I&apos;m{" "}
-                  <span className="font-bold">obsessed</span> with web dev,
-                  aspiring{" "}
-                  <span className="font-bold">
-                    to be the best and to work with the best.
-                  </span>{" "}
-                  I keep up with the work of the highest skilled programmers,
-                  such as Theo Browne and Matt Pocock, who are among the top
-                  0.01%. I&apos;m distinguished by{" "}
-                  <span className="font-bold">
-                    meticulous attention to detail
-                  </span>{" "}
-                  and{" "}
-                  <span className="font-bold">
-                    thinking outside the box by default
-                  </span>
-                  . I&apos;m up to date with the latest and greatest web
-                  features and can steadily navigate its current chaotic waters.
-                  My weapon of choice is{" "}
-                  <span className="font-bold">React.</span> I&apos;ve been
-                  enjoying its&apos; recent takeover of the server side with the{" "}
-                  <span className="font-bold">Next.js</span> framework to build{" "}
-                  <span className="font-bold">full</span>
-                  <span className="font-bold">-</span>
-                  <span className="font-bold">stack</span> applications using{" "}
-                  <span className="font-bold">Typescript</span> and{" "}
-                  <span className="font-bold">TailwindCSS</span> to my
-                  advantage. I&apos;m committed to working with the best, and
-                  this portfolio website will show you that my web dev skills
-                  are up to par. I&apos;m{" "}
-                  <span className="font-bold">the solutionist</span> to your
-                  issues, delivering{" "}
-                  <span className="font-bold">real value</span> where it
-                  matters.
+                  <Balancer>
+                    I Graduated in{" "}
+                    <span className="font-bold">
+                      Forensic Chemistry and Toxicology
+                    </span>{" "}
+                    (wild, I know) with a bachelor&apos;s degree and{" "}
+                    <span className="font-bold">Computer Science</span> with an
+                    engineer&apos;s degree. I started coding over three years
+                    ago and already have a year of professional experience as a
+                    web developer. I&apos;m{" "}
+                    <span className="font-bold">obsessed</span> with web dev,
+                    aspiring{" "}
+                    <span className="font-bold">
+                      to be the best and to work with the best.
+                    </span>{" "}
+                    <span className="hidden sm:inline">
+                      I keep up with the work of the highest skilled
+                      programmers, such as Theo Browne and Matt Pocock, who are
+                      among the top 0.01%.
+                    </span>{" "}
+                    I&apos;m distinguished by{" "}
+                    <span className="font-bold">
+                      meticulous attention to detail
+                    </span>{" "}
+                    and{" "}
+                    <span className="font-bold">
+                      thinking outside the box by default
+                    </span>
+                    .{" "}
+                    <span className="hidden sm:inline">
+                      I&apos;m up to date with the latest and greatest web
+                      features and can steadily navigate its current chaotic
+                      waters.
+                    </span>{" "}
+                    <span className="font-bold">
+                      My weapon of choice is React.
+                    </span>{" "}
+                    I&apos;ve been enjoying its&apos; recent takeover of the
+                    server side with the{" "}
+                    <span className="font-bold">Next.js</span> framework to
+                    build <span className="font-bold">full</span>
+                    <span className="font-bold">-</span>
+                    <span className="font-bold">stack</span> applications using{" "}
+                    <span className="font-bold">Typescript</span> and{" "}
+                    <span className="font-bold">TailwindCSS</span> to my
+                    advantage. I&apos;m committed to working with the best, and
+                    this portfolio website will show you that my web dev skills
+                    are up to par. I&apos;m{" "}
+                    <span className="font-bold">the solutionist</span> to your
+                    issues, delivering{" "}
+                    <span className="font-bold">real value</span> where it
+                    matters.
+                  </Balancer>
                 </p>
               </div>
             </div>

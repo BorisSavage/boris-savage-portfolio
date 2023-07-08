@@ -821,18 +821,18 @@ electron-to-chromium@^1.4.428:
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.430.tgz#52693c812a81800fafb5b312c1a850142e2fc9eb"
   integrity sha512-FytjTbGwz///F+ToZ5XSeXbbSaXalsVRXsz2mHityI5gfxft7ieW3HqFLkU5V1aIrY42aflICqbmFoDxW10etg==
 
-embla-carousel-react@^8.0.0-rc07:
-  version "8.0.0-rc07"
-  resolved "https://registry.yarnpkg.com/embla-carousel-react/-/embla-carousel-react-8.0.0-rc07.tgz#526aacb736d4695dbfdeeeaeb3d87583973699f0"
-  integrity sha512-8JX2kIMTbqHvsG6O0XRUHdZJ/66kyKCwFwFVZXZ1YpdrdMlrMHBNyIQP+ETBWgOsNtpbcBeWyZx29YtzCVLgJA==
+embla-carousel-react@^8.0.0-rc08:
+  version "8.0.0-rc08"
+  resolved "https://registry.yarnpkg.com/embla-carousel-react/-/embla-carousel-react-8.0.0-rc08.tgz#494de55dc9168d31dab276c70aa0c1d01ad3d81e"
+  integrity sha512-OdqTJrus5NEPBgO2YX+ueKZ8Kbqb6EswcyaJxbEV0lbjGQusY7AKNe5kbgDj7c7nma5wuvR93NzpC98DnhmDpQ==
   dependencies:
-    embla-carousel "8.0.0-rc07"
-    embla-carousel-reactive-utils "8.0.0-rc07"
+    embla-carousel "8.0.0-rc08"
+    embla-carousel-reactive-utils "8.0.0-rc08"
 
-embla-carousel-reactive-utils@8.0.0-rc07:
-  version "8.0.0-rc07"
-  resolved "https://registry.yarnpkg.com/embla-carousel-reactive-utils/-/embla-carousel-reactive-utils-8.0.0-rc07.tgz#e998c28972a87da3809d450f8db0032d91faf884"
-  integrity sha512-MfdReTR3p0GTcUqLY0DNF5mkYRHF/pler9yBUjRjjjBb1OTQjcFedXYhoCDO49009x/IPM00kcbQQuEtJWpQRQ==
+embla-carousel-reactive-utils@8.0.0-rc08:
+  version "8.0.0-rc08"
+  resolved "https://registry.yarnpkg.com/embla-carousel-reactive-utils/-/embla-carousel-reactive-utils-8.0.0-rc08.tgz#7f2d9bb4b4604a7b76c1b600b65aa652f4493271"
+  integrity sha512-q+FyiUcK3LF8HjZoBGD2hCPrukF3kYFbC2CK3mPlc17HtFupSXzu/aKR+8GBjaaouCSomdTee8w2fybUL16TVA==
 
 embla-carousel-wheel-gestures@^8.0.0-rc04:
   version "8.0.0-rc04"
@@ -841,10 +841,10 @@ embla-carousel-wheel-gestures@^8.0.0-rc04:
   dependencies:
     wheel-gestures "^2.2.5"
 
-embla-carousel@8.0.0-rc07:
-  version "8.0.0-rc07"
-  resolved "https://registry.yarnpkg.com/embla-carousel/-/embla-carousel-8.0.0-rc07.tgz#3d0efd24a45d4439f29299bf6b6c3e5cdedc40ee"
-  integrity sha512-IdGbZH042gRT0/3dOCbiv45jOt5E7jpM4h25VzyJujule/3GitJ1/Ib3U/X83auiI3aojKoBe13e1g5g7bwnjg==
+embla-carousel@8.0.0-rc08:
+  version "8.0.0-rc08"
+  resolved "https://registry.yarnpkg.com/embla-carousel/-/embla-carousel-8.0.0-rc08.tgz#36cae041a741405940b39ce62b3f193ef6bef01d"
+  integrity sha512-0XY/QuclHU2aStnxUHLfv8wecVb36oLhFTP0WRc+4Ob/vKCXnJFIE2O6XceuuHqxcu7lGRt/SgqzAysufokPug==
 
 emoji-regex@^9.2.2:
   version "9.2.2"
@@ -2359,6 +2359,11 @@ react-social-icons@^5.15.0:
   integrity sha512-khfDgUiUwEBe34T6br2+mkXQg3hLVDdviVjexxZoVCsogMgxTy/m8+KlX/j6Wa7P2BPxgZ7yZ2jXw3X06pUUFQ==
   dependencies:
     prop-types "^15.7.2"
+
+react-wrap-balancer@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-wrap-balancer/-/react-wrap-balancer-1.0.0.tgz#f45f8af7cf68d9d54d16a8cf271047b75d1431d7"
+  integrity sha512-yjDH+I8WGyDfh95gKhX/6ckfSBAltwQkxiYxtLPlyIRQNUVSjvz1uHR6Hpy+zHyOkJQw6GEC5RPglA41QXvzyw==
 
 react@18.2.0:
   version "18.2.0"

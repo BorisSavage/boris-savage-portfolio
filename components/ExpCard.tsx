@@ -1,6 +1,6 @@
-import { motion, useInView } from "framer-motion";
+import { useAnimate, useInView } from "framer-motion";
 import Image, { StaticImageData } from "next/image";
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/cn";
 import useShardAnimation from "@/hooks/useShardAnimation";
 import { PageScrollContext } from "@/app/page";
@@ -15,14 +15,14 @@ export default function ExpCard({
   children: React.ReactNode;
   image?: StaticImageData;
 }) {
-  const cardRef = useRef<HTMLElement>(null);
+  const [cardRef, animateCard] = useAnimate();
   const [isPointing, setIsPointing] = useState(false);
 
   const { shardRef, isCenter, isEnd } = useShardAnimation();
 
   const { setPageScroll } = useContext(PageScrollContext);
 
-  const isInView = useInView(cardRef, { amount: 1 });
+  const isInView = useInView(cardRef, { amount: 0.8 });
 
   const handlePointerDown = () => {
     if (isInView) {
@@ -30,19 +30,39 @@ export default function ExpCard({
     }
   };
 
-  const { scrollRef, isCarouselScrolling } = useScrollHandler();
+  useEffect(() => {
+    animateCard(
+      "#cardContent",
+      isInView
+        ? {
+            y: 0,
+            opacity: 1,
+            filter: "grayscale(0)",
+          }
+        : {
+            y: -200,
+            opacity: 0,
+            filter: "grayscale(1)",
+          },
+      {
+        duration: 1,
+        ease: [0.2, 0.8, 0.2, 1],
+      }
+    );
+  }, [isInView]);
+  //const { scrollRef, isCarouselScrolling } = useScrollHandler();
 
   return (
     <article
+      ref={cardRef}
       onMouseDown={() => handlePointerDown()}
       onMouseUp={() => setPageScroll(true)}
       onPointerEnter={() => setIsPointing(true)}
       onTouchMove={() => setIsPointing(true)}
       onPointerLeave={() => setIsPointing(false)}
       onTouchEnd={() => setIsPointing(false)}
-      ref={cardRef}
       className={cn(
-        "group relative h-[90%] w-[90%] min-w-[300px] max-w-[85vw] flex-shrink-0 cursor-grab snap-center rounded-bl-[6rem] rounded-br-sm rounded-tl-sm rounded-tr-[6rem]",
+        "group relative h-[95%] w-[100%] min-w-[300px] flex-shrink-0 cursor-grab snap-center rounded-bl-[6rem] rounded-br-sm rounded-tl-sm rounded-tr-[6rem]",
         "sm:w-[550px]",
         "lg:w-[600px]",
         "xl:w-[90%] xl:max-w-[900px]",
@@ -52,7 +72,7 @@ export default function ExpCard({
       <div
         className={cn(
           "absolute inset-0 overflow-hidden rounded-bl-[6rem] rounded-br-sm rounded-tl-sm rounded-tr-[6rem] bg-mossy_glen-950/20 to-transparent transition-all duration-[500ms] ease-out",
-          { "-inset-[2.5%] ease-in-out": isPointing }
+          { [cn("-inset-y-[2%] ease-in-out", "sm:-inset-[2.5%]")]: isPointing }
         )}
       >
         <div
@@ -107,23 +127,27 @@ export default function ExpCard({
           )}
         ></div>
       </div>
-      <motion.div
-        initial={{
-          y: -100,
-          opacity: 0,
-        }}
-        transition={{
-          duration: 1.2,
-        }}
-        whileInView={{
-          opacity: 1,
-          y: 0,
-        }}
-        viewport={{
-          once: true,
-        }}
+      <div
+        id="cardContent"
+        // initial={{
+        //   y: -100,
+        //   opacity: 0,
+        // }}
+        // transition={{
+        //   duration: 1,
+        // }}
+        // whileInView={{
+        //   opacity: 1,
+        //   y: 0,
+        // }}
+        // viewport={
+        //   {
+        //     // once: true,
+        //   }
+        // }
         className={cn(
-          "relative flex h-full w-full flex-col items-center justify-start rounded-bl-[6rem] rounded-br-sm rounded-tl-sm rounded-tr-[6rem] p-8 pr-6"
+          "relative flex h-full w-full flex-col items-center justify-start overflow-hidden rounded-bl-[6rem] rounded-br-sm rounded-tl-sm rounded-tr-[6rem] px-4 pt-5",
+          "sm:pb-6 sm:pt-10"
         )}
       >
         {image && (
@@ -131,30 +155,30 @@ export default function ExpCard({
             src={image}
             alt="that's me"
             className={cn(
-              "mx-auto h-28 w-28 rounded-full object-cover object-center opacity-80 drop-shadow-2xl",
-              "sm:h-32 sm:w-32",
-              "lg:h-40 lg:w-40",
+              "mx-auto h-20 w-20 rounded-full object-cover object-center opacity-80 drop-shadow-2xl",
+              "sm:h-40 sm:w-40",
+              // "lg:h-40 lg:w-40",
               "xl:h-48 xl:w-48"
             )}
           />
         )}
 
         <div
-          ref={scrollRef}
+          //ref={scrollRef}
           className={cn(
-            "mt-4 w-full overflow-y-auto px-0 scrollbar scrollbar-w-1",
-            "lg:px-10",
-            {
-              "scrollbar-track-mossy_glen-500/0 scrollbar-thumb-mossy_glen-500/0":
-                isCarouselScrolling,
-              "scrollbar-track-mossy_glen-500/10 scrollbar-thumb-mossy_glen-500/20":
-                !isCarouselScrolling,
-            }
+            "mt-4 flex w-full grow flex-col items-start justify-start overflow-y-auto px-0 scrollbar scrollbar-w-1",
+            "sm:px-10"
+            // {
+            //   "scrollbar-track-mossy_glen-500/0 scrollbar-thumb-mossy_glen-500/0":
+            //     isCarouselScrolling,
+            //   "scrollbar-track-mossy_glen-500/10 scrollbar-thumb-mossy_glen-500/20":
+            //     !isCarouselScrolling,
+            // }
           )}
         >
           {children}
         </div>
-      </motion.div>
+      </div>
     </article>
   );
 }

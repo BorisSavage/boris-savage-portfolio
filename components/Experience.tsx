@@ -3,6 +3,7 @@ import ExpCard from "./ExpCard";
 import Carousel from "./Carousel";
 import { cn } from "@/lib/cn";
 import ckc from "@/public/ckc.webp";
+import { Balancer } from "react-wrap-balancer";
 
 export default function Experience() {
   return (
@@ -10,30 +11,46 @@ export default function Experience() {
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 1.5 }}
-      className="relative mx-auto flex h-screen max-w-full flex-col items-center justify-end overflow-hidden py-24 text-left"
+      className={cn(
+        "relative mx-auto flex h-screen max-w-full flex-col items-center justify-end overflow-hidden pt-14 text-left",
+        "sm:pb-12 sm:pt-32"
+      )}
     >
-      <h3 className="absolute top-16 pl-[20px] text-2xl uppercase tracking-[20px] text-mossy_glen-100 drop-shadow-lg">
+      <h3
+        className={cn(
+          "absolute top-4 pl-[13px] text-2xl uppercase tracking-[13px] text-mossy_glen-100 drop-shadow-lg",
+          "sm:top-16 sm:pl-[20px] sm:tracking-[20px]"
+        )}
+      >
         Experience
       </h3>
 
       <Carousel>
         <ExpCard image={ckc}>
-          <h4 className="text-4xl font-light text-sunlit_meadow-200 drop-shadow">
-            Front End Engineer
-          </h4>
-          <p className="mt-1 text-2xl font-bold text-misty_mountains-400 drop-shadow">
-            Cinkciarz.pl
-          </p>
+          <div className="w-fit rounded-tr-[3rem] bg-mossy_glen-950/20 pb-1">
+            <h4 className="inline-block w-fit pr-8 text-2xl font-light text-sunlit_meadow-200 drop-shadow sm:text-4xl">
+              Front End Engineer
+            </h4>
+            <h5 className="mt-1 text-lg font-bold text-misty_mountains-400 drop-shadow sm:text-2xl">
+              Cinkciarz.pl
+            </h5>
+          </div>
           {/* <div className="my-2 flex space-x-2">
             TECH USED
           </div> */}
-          <p className={cn("py-5 text-sm text-mossy_glen-300", "sm:text-base")}>
+          <p
+            className={cn(
+              "w-fit rounded-tr-[3rem]  bg-mossy_glen-950/20 py-1 pr-8 text-sm text-mossy_glen-300",
+              "sm:text-base"
+            )}
+          >
             September 2022 - July 2023
           </p>
           <ul
             className={cn(
-              "ml-5 list-disc space-y-2 text-sm drop-shadow",
-              "sm:space-y-4 sm:text-base"
+              "ml-5 flex grow list-disc flex-col items-start justify-evenly rounded-bl-xl rounded-br-sm rounded-tl-sm rounded-tr-xl bg-mossy_glen-950/20 p-1 text-justify text-sm drop-shadow",
+              "sm:space-y-4 sm:text-base",
+              "xl:rounded-bl-2xl xl:rounded-tr-2xl"
             )}
           >
             <li>
@@ -57,16 +74,18 @@ export default function Experience() {
           </ul>
         </ExpCard>
         <ExpCard image={ckc}>
-          <h4 className="text-4xl font-light text-sunlit_meadow-200 drop-shadow">
-            Front End Web Developer Intern
-          </h4>
-          <p className="mt-1 text-2xl font-bold text-misty_mountains-400 drop-shadow">
-            Cinkciarz.pl
-          </p>
+          <div className="w-fit rounded-tr-[3rem] bg-mossy_glen-950/20 pb-1">
+            <h4 className="pr-8 text-2xl font-light text-sunlit_meadow-200 drop-shadow sm:text-4xl">
+              Front End Engineer Intern
+            </h4>
+            <h5 className="mt-1 text-lg font-bold text-misty_mountains-400 drop-shadow sm:text-2xl">
+              Cinkciarz.pl
+            </h5>
+          </div>
 
           <p
             className={cn(
-              "py-5 text-sm uppercase text-mossy_glen-300",
+              "w-fit rounded-tr-[3rem]  bg-mossy_glen-950/20 py-1 pr-8 text-sm text-mossy_glen-300",
               "sm:text-base"
             )}
           >
@@ -74,8 +93,9 @@ export default function Experience() {
           </p>
           <ul
             className={cn(
-              "ml-5 list-disc space-y-2 text-sm drop-shadow",
-              "sm:space-y-4 sm:text-base"
+              "ml-5 flex grow list-disc flex-col items-start justify-evenly rounded-bl-xl rounded-br-sm rounded-tl-sm rounded-tr-xl bg-mossy_glen-950/20 p-1 text-justify text-sm drop-shadow",
+              "sm:space-y-4 sm:text-base",
+              "xl:rounded-bl-2xl xl:rounded-tr-2xl"
             )}
           >
             <li>

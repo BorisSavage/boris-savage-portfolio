@@ -1,8 +1,7 @@
-import mockup from "@/public/FE-mockup.png";
 import { cn } from "@/lib/cn";
 
 import { stagger, useAnimate, useInView } from "framer-motion";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import { useContext, useEffect, useRef, useState } from "react";
 import useShardAnimation from "@/hooks/useShardAnimation";
 import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline";
@@ -11,30 +10,39 @@ import { PageScrollContext } from "@/app/page";
 
 export default function Project({
   parallaxTweenValue = 0,
+  image,
+  title,
+  children,
+  href,
 }: {
   parallaxTweenValue?: number;
+  image?: StaticImageData;
+  title: string;
+  children: React.ReactNode;
+  href: string;
 }) {
-  const [title] = useState("Case Study 1 of 4: ChatGPT Clone");
-
   const splitTitle = title.split(" ");
 
   const [animatePicRef, animatePic] = useAnimate();
-  const isPicInView = useInView(animatePicRef, { amount: 1, once: true });
+  const isPicInView = useInView(animatePicRef, {
+    amount: 0.8,
+    // once: true
+  });
 
   const [animateHeadingRef, animateHeading] = useAnimate();
   const isHeadingInView = useInView(animateHeadingRef, {
-    amount: 1,
-    once: true,
+    amount: 0.8,
+    // once: true,
   });
 
-  const cardRef = useRef<HTMLElement>(null);
+  //const cardRef = useRef<HTMLElement>(null);
   const [isPointingCard, setIsPointingCard] = useState(false);
   const [isPointingImage, setIsPointingImage] = useState(false);
   const [isPointingHeader, setIsPointingHeader] = useState(false);
 
   const { shardRef, isCenter, isEnd } = useShardAnimation();
 
-  const { scrollRef, isCarouselScrolling } = useScrollHandler();
+  //const { scrollRef, isCarouselScrolling } = useScrollHandler();
 
   const { setPageScroll } = useContext(PageScrollContext);
 
@@ -52,23 +60,24 @@ export default function Project({
           },
       {
         duration: 0.2,
-        delay: stagger(0.04, { ease: [0.9, 0.06, 0.15, 0.9], startDelay: 0.2 }),
+        delay: stagger(0.04, {
+          ease: [0.9, 0.06, 0.15, 0.9],
+          startDelay: 0,
+        }),
       }
     );
   }, [isHeadingInView]);
 
   useEffect(() => {
     animatePic(
-      animatePicRef.current,
+      "#pic",
       isPicInView
         ? {
             opacity: 1,
-            filter: "blur(0px)",
             transform: "translateY(0px)",
           }
         : {
             opacity: 0,
-            filter: "blur(50px)",
             transform: "translateY(-150px)",
           },
       {
@@ -93,10 +102,10 @@ export default function Project({
       onTouchMove={() => setIsPointingCard(true)}
       onPointerLeave={() => setIsPointingCard(false)}
       onTouchEnd={() => setIsPointingCard(false)}
-      ref={cardRef}
+      //ref={cardRef}
       className={cn(
-        "group relative h-[90%] w-[90%] min-w-[300px] max-w-[85vw] flex-shrink-0 cursor-grab snap-center rounded-bl-sm rounded-br-[6rem] rounded-tl-[6rem] rounded-tr-sm",
-        "sm:w-[550px]",
+        "group relative h-[95%] w-[100%] min-w-[300px] flex-shrink-0 cursor-grab snap-center rounded-bl-sm rounded-br-[6rem] rounded-tl-[6rem] rounded-tr-sm",
+        "sm:w-[550px] sm:max-w-[85dvw]",
         "lg:w-[600px]",
         "xl:w-[90%] xl:max-w-[900px]",
         "active:cursor-grabbing"
@@ -105,7 +114,10 @@ export default function Project({
       <div
         className={cn(
           "absolute inset-0 overflow-hidden rounded-bl-sm rounded-br-[6rem] rounded-tl-[6rem] rounded-tr-sm bg-mossy_glen-950/20 transition-all duration-[500ms] ease-out",
-          { "-inset-[2.5%] ease-in-out": isPointingCard }
+          {
+            [cn("-inset-y-[2%] ease-in-out", "sm:-inset-[2.5%]")]:
+              isPointingCard,
+          }
         )}
       >
         <div
@@ -161,41 +173,50 @@ export default function Project({
         ></div>
       </div>
       <div
+        ref={animatePicRef}
         className={cn(
-          "relative flex h-full w-full flex-col items-center justify-start space-y-0.5 rounded-bl-sm rounded-br-[6rem] rounded-tl-[6rem] rounded-tr-sm p-8 pr-6 xs:justify-center xs:space-y-2"
+          "relative flex h-full w-full flex-col items-center justify-start space-y-0.5 overflow-hidden rounded-bl-sm rounded-br-[6rem] rounded-tl-[6rem] rounded-tr-sm px-4 pt-5",
+          "sm:space-y-2 sm:pb-6"
         )}
       >
         <div
-          ref={animatePicRef}
+          id="pic"
           onPointerEnter={() => setIsPointingImage(true)}
           onTouchMove={() => setIsPointingImage(true)}
           onPointerLeave={() => setIsPointingImage(false)}
           onTouchEnd={() => setIsPointingImage(false)}
-          className={cn("mx-auto max-w-xl px-0 md:px-10")}
+          className={cn(
+            "mx-auto max-w-[10rem] px-0",
+            // "sm:max-w-xl",
+            "sm:max-w-xs"
+            // "md:px-10"
+          )}
         >
-          <a href="https://www.youtube.com/">
-            <Image
-              src={mockup}
-              alt="design mockup"
-              className={cn("transition duration-[1000ms] ease-in-out", {
-                "scale-90 ease-out": isPointingImage,
-              })}
-            />
+          <a href={href}>
+            {image && (
+              <Image
+                src={image}
+                alt="design mockup"
+                className={cn("transition duration-[1000ms] ease-in-out", {
+                  "scale-90 ease-out": isPointingImage,
+                })}
+              />
+            )}
           </a>
         </div>
         <div
-          ref={scrollRef}
+          //ref={scrollRef}
           className={cn(
-            "scrollbar-track-misty-mountains-500/20 max-w-4xl space-y-0.5 overflow-y-auto scrollbar scrollbar-w-1",
-            "xs:space-y-2 ",
-            "sm:space-y-10",
-            "md:px-10",
-            {
-              "scrollbar-track-mossy_glen-500/0 scrollbar-thumb-mossy_glen-500/0":
-                isCarouselScrolling,
-              "scrollbar-track-mossy_glen-500/10 scrollbar-thumb-mossy_glen-500/20":
-                !isCarouselScrolling,
-            }
+            "scrollbar-track-misty-mountains-500/20 flex max-w-4xl grow flex-col items-center justify-start space-y-0.5 overflow-y-auto scrollbar scrollbar-w-1",
+            // "xs:space-y-2 ",
+            //"sm:space-y-10",
+            "md:px-6"
+            // {
+            //   "scrollbar-track-mossy_glen-500/0 scrollbar-thumb-mossy_glen-500/0":
+            //     isCarouselScrolling,
+            //   "scrollbar-track-mossy_glen-500/10 scrollbar-thumb-mossy_glen-500/20":
+            //     !isCarouselScrolling,
+            // }
           )}
         >
           <div
@@ -204,8 +225,8 @@ export default function Project({
             onPointerLeave={() => setIsPointingHeader(false)}
             onTouchEnd={() => setIsPointingHeader(false)}
             className={cn(
-              "relative mx-auto w-fit overflow-hidden rounded-bl-sm rounded-br-[3rem] rounded-tl-[3rem] rounded-tr-sm bg-gradient-to-r from-transparent via-mossy_glen-950/20 to-transparent px-4 transition-all duration-[1000ms] ease-in-out",
-              "sm:px-4",
+              "relative mx-auto w-fit overflow-hidden rounded-bl-sm rounded-br-[3rem] rounded-tl-[3rem] rounded-tr-sm bg-mossy_glen-950/20 to-transparent px-8 transition-all duration-[1000ms] ease-in-out",
+              "sm:px-8",
               {
                 "rounded-bl-[3rem] rounded-br-sm rounded-tl-sm rounded-tr-[3rem] ease-out":
                   isPointingHeader,
@@ -221,16 +242,17 @@ export default function Project({
                 }
               )}
             ></div>
-            <a href="https://www.youtube.com/">
-              <h4 ref={animateHeadingRef} className="pb-[4px] text-center">
+            <a href={href}>
+              <h4 ref={animateHeadingRef} className="pb-1 text-center">
                 <div>
                   {splitTitle.map((word, index) => {
-                    if (index <= 4)
+                    if (index <= 5)
                       return (
                         <span
                           key={index}
                           className={cn(
-                            "mr-2 inline-block text-2xl font-bold text-misty_mountains-400  drop-shadow"
+                            "mr-2 inline-block text-lg font-bold text-misty_mountains-400 drop-shadow",
+                            "sm:text-2xl"
                           )}
                         >
                           {word}
@@ -245,7 +267,8 @@ export default function Project({
                         <div className="inline-block" key={index}>
                           <span
                             className={cn(
-                              "mr-2 inline-block text-4xl font-light text-sunlit_meadow-200 drop-shadow"
+                              "mr-2 inline-block text-2xl font-light text-sunlit_meadow-200 drop-shadow",
+                              "sm:text-4xl"
                             )}
                           >
                             {word}
@@ -255,12 +278,13 @@ export default function Project({
                           </span>
                         </div>
                       );
-                    if (index > 4)
+                    if (index > 5)
                       return (
                         <span
                           key={index}
                           className={cn(
-                            "mr-2 inline-block text-4xl font-light text-sunlit_meadow-200 drop-shadow"
+                            "mr-2 inline-block text-2xl font-light text-sunlit_meadow-200 drop-shadow",
+                            "sm:text-4xl"
                           )}
                         >
                           {word}
@@ -271,22 +295,7 @@ export default function Project({
               </h4>
             </a>
           </div>
-          <div className="rounded-lg bg-gradient-to-b from-transparent via-mossy_glen-950/20 to-transparent px-2 py-1 text-sm sm:text-base">
-            <p className="max-h-[30vh] text-justify drop-shadow-lg md:max-h-[40vh]">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque
-              dolorem hic voluptates alias odio sapiente rem nam ipsam corporis
-              veniam est consequuntur, ex inventore placeat non voluptas magnam
-              ipsum labore! hic voluptates alias odio sapiente rem nam ipsam
-              corporis veniam est consequuntur, ex inventore placeat non
-              voluptas magnam ipsum labore! Lorem ipsum dolor sit amet
-              consectetur, adipisicing elit. Eaque dolorem hic voluptates alias
-              odio sapiente rem nam ipsam corporis veniam est consequuntur, ex
-              inventore placeat non voluptas magnam ipsum labore! hic voluptates
-              alias odio sapiente rem nam ipsam corporis veniam est
-              consequuntur, ex inventore placeat non voluptas magnam ipsum
-              labore!
-            </p>
-          </div>
+          {children}
         </div>
       </div>
     </article>

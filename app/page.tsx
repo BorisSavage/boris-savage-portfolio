@@ -67,6 +67,23 @@ export default function Page() {
 
   const [isLastIndex, setIsLastIndex] = useState(false);
 
+  const [isMobile, setISMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const isMobileQuery = window.matchMedia("(max-width: 640px");
+      setISMobile(isMobileQuery.matches);
+    };
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const handleMove = ({
     clientX,
     clientY,
@@ -81,7 +98,13 @@ export default function Page() {
           top: `${clientY}px`,
         },
         {
-          duration: isCardSection ? 1000 : 3000,
+          duration: isMobile
+            ? isCardSection
+              ? 500
+              : 1000
+            : isCardSection
+            ? 1000
+            : 3000,
           fill: "forwards",
           easing: "cubic-bezier(.2,.8,.2,1)",
         }
@@ -119,9 +142,9 @@ export default function Page() {
             setTriggerAnimate((prevState) => !prevState);
           }
           if (
+            entry.target === aboutRef.current ||
             entry.target === experienceRef.current ||
-            entry.target === projectsRef.current ||
-            entry.target === contactRef.current
+            entry.target === projectsRef.current
           ) {
             setIsCardSection(entry.isIntersecting);
           }
@@ -158,7 +181,7 @@ export default function Page() {
         //onPointerMove={useThrottle(handlePointerMove)}
         ref={pageRef}
         // className="relative z-0 h-screen overflow-x-hidden overflow-y-scroll bg-transparent text-white scrollbar-thin scrollbar-track-mossy_glen-500/25 scrollbar-thumb-mossy_glen-300/50 scrollbar-track-rounded-full scrollbar-thumb-rounded-full"
-        className="relative z-0 h-screen overflow-hidden bg-transparent text-white"
+        className="relative z-0 h-[100dvh] overflow-hidden bg-transparent text-white"
       >
         {/* <p className="middle"></p> */}
         <PageScrollContext.Provider value={{ pageScroll, setPageScroll }}>
