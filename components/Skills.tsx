@@ -29,7 +29,7 @@ export default function Skills() {
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 1.5 }}
-      className="relative mx-auto flex min-h-screen max-w-[2000px] flex-col items-center justify-center pt-20  text-center  md:text-left xl:flex-row xl:space-y-0 xl:px-10"
+      className="relative mx-auto flex min-h-[100dvh] max-w-[2000px] flex-col items-center justify-center pt-20  text-center  md:text-left xl:flex-row xl:space-y-0 xl:px-10"
     >
       <h3 className="absolute top-16 pl-[20px] text-2xl uppercase tracking-[20px] text-mossy_glen-100 drop-shadow-lg">
         Skills

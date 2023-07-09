@@ -193,7 +193,7 @@ export default function VerticalCarousel({
     <>
       <div
         ref={emblaRef}
-        className="(border-4 bg-pink-400) h-screen w-screen overflow-hidden border-red-500"
+        className="(border-4 bg-pink-400) h-[100dvh] w-[100dvw] overflow-hidden border-red-500"
       >
         <div className="(border-4 bg-green-500) flex h-full w-full flex-col border-gray-500">
           <SetIndexContext.Provider value={{ scrollTo }}>
@@ -207,7 +207,7 @@ export default function VerticalCarousel({
                     key={index}
                     style={{
                       ...(opacityTweenValues.length && {
-                        opacity: opacityTweenValues[index],
+                        //opacity: opacityTweenValues[index],
                         scale: opacityTweenValues[index],
                       }),
                     }}

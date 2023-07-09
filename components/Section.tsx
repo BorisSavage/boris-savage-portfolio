@@ -21,7 +21,7 @@ export default function Section({
         "cursor-grab active:cursor-grabbing": grab,
       })}
     >
-      <div
+      {/* <div
         style={{
           WebkitMask: "radial-gradient(closest-side, red 0%, transparent 100%)",
           mask: "radial-gradient(closest-side, red 0%, transparent 100%)",
@@ -44,7 +44,7 @@ export default function Section({
           }}
           className="absolute -inset-y-[30.9%] inset-x-0"
         ></div>
-      </div>
+      </div> */}
       {children}
     </section>
   );

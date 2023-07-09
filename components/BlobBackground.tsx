@@ -12,7 +12,7 @@ export default function BlobBackground({
 }) {
   return (
     <>
-      <div className="fixed left-0 top-0 -z-40 h-[100vh] w-[100vw] bg-mossy_glen-950" />
+      <div className="fixed left-0 top-0 -z-40 h-[100dvh] w-[100dvw] bg-mossy_glen-950" />
       <div
         ref={blobRef}
         className={cn(

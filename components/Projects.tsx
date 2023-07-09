@@ -13,7 +13,7 @@ export default function Projects() {
       whileInView={{ opacity: 1 }}
       transition={{ duration: 1.5 }}
       className={cn(
-        "relative mx-auto flex h-screen max-w-full flex-col items-center justify-end overflow-hidden pt-14 text-left",
+        "relative mx-auto flex h-[100dvh] max-w-full flex-col items-center justify-end overflow-hidden pt-14 text-left",
         "sm:pb-12 sm:pt-32"
       )}
     >

@@ -40,7 +40,7 @@ export default function ContactMe() {
     <div
       //ref={scrollRef}
       className={cn(
-        "relative mx-auto flex h-screen w-full max-w-7xl flex-col items-center justify-center overflow-y-auto overflow-x-hidden px-10 pt-16 text-center transition duration-500 ease-in-out scrollbar scrollbar-w-2"
+        "relative mx-auto flex h-[100dvh] w-full max-w-7xl flex-col items-center justify-center overflow-y-auto overflow-x-hidden px-10 pt-16 text-center transition duration-500 ease-in-out scrollbar scrollbar-w-2"
         // {
         //   "scrollbar-track-sunlit_meadow-300/0 scrollbar-thumb-sunlit_meadow-300/0":
         //     isCarouselScrolling,

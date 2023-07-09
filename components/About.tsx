@@ -84,7 +84,7 @@ export default function About() {
       whileInView={{ opacity: 1 }}
       transition={{ duration: 1.5 }}
       className={cn(
-        "relative mx-auto flex h-screen max-w-7xl flex-col items-center justify-center pt-6",
+        "relative mx-auto flex h-[100dvh] max-w-7xl flex-col items-center justify-center pt-6",
         "sm:space-y-5 sm:p-5 sm:pt-10",
         "lg:grid lg:grid-cols-2"
       )}

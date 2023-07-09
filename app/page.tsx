@@ -180,7 +180,7 @@ export default function Page() {
         //onPointerEnter={handlePointerMove}
         //onPointerMove={useThrottle(handlePointerMove)}
         ref={pageRef}
-        // className="relative z-0 h-screen overflow-x-hidden overflow-y-scroll bg-transparent text-white scrollbar-thin scrollbar-track-mossy_glen-500/25 scrollbar-thumb-mossy_glen-300/50 scrollbar-track-rounded-full scrollbar-thumb-rounded-full"
+        // className="relative z-0 h-[100dvh] overflow-x-hidden overflow-y-scroll bg-transparent text-white scrollbar-thin scrollbar-track-mossy_glen-500/25 scrollbar-thumb-mossy_glen-300/50 scrollbar-track-rounded-full scrollbar-thumb-rounded-full"
         className="relative z-0 h-[100dvh] overflow-hidden bg-transparent text-white"
       >
         {/* <p className="middle"></p> */}

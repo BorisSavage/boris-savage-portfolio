@@ -70,7 +70,7 @@ export default function Hero() {
 
   return (
     <div>
-      <div className="flex h-screen flex-col items-center justify-center space-y-8 overflow-hidden pt-12 text-center md:pb-16 md:pt-0">
+      <div className="flex h-[100dvh] flex-col items-center justify-center space-y-8 overflow-hidden pt-12 text-center md:pb-16 md:pt-0">
         <BackgroundCircles />
         <Image
           className="relative mx-auto h-32 w-32 rounded-full transition duration-[2000ms] ease-savage-sig-2 hover:opacity-50 hover:duration-[1000ms]"

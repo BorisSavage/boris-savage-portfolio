@@ -100,7 +100,7 @@ export default function ExpCard({
             backgroundSize: "6px 6px",
             transform: `translate(${-50 + parallaxTweenValue * 1.618}%, -50%)`,
           }}
-          className="absolute left-1/2 top-1/2 h-[100vh] w-[100vw]"
+          className="absolute left-1/2 top-1/2 h-[100dvh] w-[100dvw]"
         ></div>
         <div
           style={{
@@ -112,7 +112,7 @@ export default function ExpCard({
               -50 + parallaxTweenValue * 1.618 * 1.618
             }%, -50%)`,
           }}
-          className="absolute left-1/2 top-1/2 h-[100vh] w-[100vw]"
+          className="absolute left-1/2 top-1/2 h-[100dvh] w-[100dvw]"
         ></div>
         <div
           ref={shardRef}
