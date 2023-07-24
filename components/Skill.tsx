@@ -7,7 +7,6 @@ export default function Skill({
   directionX,
   directionY,
   image,
-  percentage,
   imageElement,
   sizeMultiplier,
   isSkillsInView,
@@ -16,7 +15,6 @@ export default function Skill({
   directionY: number;
   image?: StaticImageData;
   imageElement?: React.ReactNode;
-  percentage: string;
   sizeMultiplier?: number;
   isSkillsInView: boolean;
 }) {
@@ -72,7 +70,7 @@ export default function Skill({
 
         <div
           className={cn(
-            "absolute h-full w-full rounded-full bg-mossy_glen-950 opacity-0 transition duration-[500ms] ease-in",
+            "absolute h-full w-full rounded-full bg-mossy_glen-950 opacity-0  transition duration-[500ms] ease-in",
             "group-hover:opacity-80  group-hover:duration-[500ms] group-hover:ease-out"
           )}
         ></div>
@@ -90,34 +88,8 @@ export default function Skill({
             "relative flex h-[70%] w-[70%] flex-col items-center justify-center"
           )}
         >
-          {image && (
-            <Image
-              src={image}
-              alt="technical skill"
-              fill
-              className="filter transition duration-[750ms] ease-in  group-hover:opacity-50 group-hover:grayscale group-hover:delay-0 group-hover:duration-[500ms] group-hover:ease-out"
-            />
-          )}
+          {image && <Image src={image} alt="technical skill" fill />}
           {imageElement}
-        </div>
-
-        <div
-          className={cn(
-            "absolute h-full w-full rounded-full bg-mossy_glen-950 opacity-0  transition duration-[500ms] ease-in",
-            "group-hover:opacity-50  group-hover:duration-[500ms] group-hover:ease-out"
-          )}
-        ></div>
-
-        <div className="absolute flex h-full w-full items-center justify-center opacity-0 duration-[500ms] group-hover:opacity-100 group-hover:duration-[500ms]">
-          <p
-            className={cn(
-              "text-2xl font-bold text-white drop-shadow",
-              "sm:text-3xl",
-              "md:text-4xl"
-            )}
-          >
-            {percentage}
-          </p>
         </div>
       </motion.div>
     </div>

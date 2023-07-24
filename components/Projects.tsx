@@ -74,7 +74,7 @@ export default function Projects() {
         <Project
           href="https://the-bloggy-blog.vercel.app/"
           image={fragrance_mockup}
-          title=" Case Study 2 of 3: Super Fast Blog With Preview Mode"
+          title=" Case Study 2 of 3: Live Editing Sanity.io Blog"
         >
           <div className="grow rounded-bl-sm rounded-br-3xl rounded-tl-3xl rounded-tr-sm bg-mossy_glen-950/20 p-1 text-sm sm:text-base">
             <ul

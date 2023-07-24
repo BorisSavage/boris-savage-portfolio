@@ -7,7 +7,6 @@ import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/cn";
-import useScrollHandler from "@/hooks/useScrollHandler";
 import { Balancer } from "react-wrap-balancer";
 
 const pictures = [
@@ -24,6 +23,8 @@ const pictures = [
   caveStanding,
   johnOGroats,
 ];
+
+const priorityIndexes = [2, 3, 4];
 
 export default function About() {
   const [isPointing, setIsPointing] = useState(false);
@@ -76,6 +77,7 @@ export default function About() {
       }, 1000);
     }
     if (!isInView && hasRun) setHasRun(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isInView]);
 
   return (
@@ -148,6 +150,7 @@ export default function About() {
                   )}
                 >
                   <Image
+                    priority={priorityIndexes.includes(index)}
                     src={image}
                     alt="that's me!"
                     className={cn(
@@ -210,10 +213,14 @@ export default function About() {
             Here is a{" "}
             <span
               className={cn("underline transition", {
-                "decoration-sunlit_meadow-300 duration-[500ms] ease-in":
-                  isPointing,
-                "decoration-misty_mountains-500 duration-[1500ms] ease-out":
-                  !isPointing,
+                [cn(
+                  "decoration-sunlit_meadow-300 duration-[500ms] ease-in",
+                  "sm:duration-[1000ms]"
+                )]: isPointing,
+                [cn(
+                  "decoration-misty_mountains-500 duration-[333ms] ease-out",
+                  "sm:duration-[667ms]"
+                )]: !isPointing,
               })}
             >
               little
@@ -230,8 +237,8 @@ export default function About() {
                     "sm:duration-[1000ms]"
                   )]: isPointing,
                   [cn(
-                    "opacity-50 duration-[1500ms] ease-out",
-                    "sm:duration-[3000ms]"
+                    "opacity-50 duration-[333ms] ease-out",
+                    "sm:duration-[667ms]"
                   )]: !isPointing,
                 }
               )}
@@ -241,12 +248,12 @@ export default function About() {
                 "absolute -inset-0.5 animate-slight_tilt rounded-2xl bg-gradient-to-br from-transparent via-mossy_glen-500 to-transparent blur-md transition",
                 {
                   [cn(
-                    "opacity-50 duration-[500ms] ease-in",
-                    "sm:duration-[1000ms]"
+                    "opacity-50 duration-[333ms] ease-in",
+                    "sm:duration-[667ms]"
                   )]: isPointing,
                   [cn(
-                    "opacity-0 duration-[1500ms] ease-out",
-                    "sm:duration-[3000ms]"
+                    "opacity-0 duration-[500ms] ease-out",
+                    "sm:duration-[1000ms]"
                   )]: !isPointing,
                 }
               )}
@@ -296,25 +303,16 @@ export default function About() {
                 >
                   <Balancer>
                     I Graduated in{" "}
+                    <span className="font-bold">Computer Science</span> and{" "}
                     <span className="font-bold">
                       Forensic Chemistry and Toxicology
                     </span>{" "}
-                    (wild, I know) with a bachelor&apos;s degree and{" "}
-                    <span className="font-bold">Computer Science</span> with an
-                    engineer&apos;s degree. I started coding over three years
-                    ago and already have a year of professional experience as a
-                    web developer. I&apos;m{" "}
+                    I started coding even before the start of my CS degree and
+                    already have a year of professional experience as a
+                    developer. I&apos;m{" "}
                     <span className="font-bold">obsessed</span> with web dev,
-                    aspiring{" "}
-                    <span className="font-bold">
-                      to be the best and to work with the best.
-                    </span>{" "}
-                    <span className="hidden sm:inline">
-                      I keep up with the work of the highest skilled
-                      programmers, such as Theo Browne and Matt Pocock, who are
-                      among the top 0.01%.
-                    </span>{" "}
-                    I&apos;m distinguished by{" "}
+                    and I aspire to work with the best. I&apos;m distinguished
+                    by{" "}
                     <span className="font-bold">
                       meticulous attention to detail
                     </span>{" "}
@@ -322,26 +320,18 @@ export default function About() {
                     <span className="font-bold">
                       thinking outside the box by default
                     </span>
-                    .{" "}
-                    <span className="hidden sm:inline">
-                      I&apos;m up to date with the latest and greatest web
-                      features and can steadily navigate its current chaotic
-                      waters.
-                    </span>{" "}
-                    <span className="font-bold">
-                      My weapon of choice is React.
-                    </span>{" "}
-                    I&apos;ve been enjoying its&apos; recent takeover of the
-                    server side with the{" "}
-                    <span className="font-bold">Next.js</span> framework to
-                    build <span className="font-bold">full</span>
-                    <span className="font-bold">-</span>
-                    <span className="font-bold">stack</span> applications using{" "}
-                    <span className="font-bold">Typescript</span> and{" "}
-                    <span className="font-bold">TailwindCSS</span> to my
-                    advantage. I&apos;m committed to working with the best, and
-                    this portfolio website will show you that my web dev skills
-                    are up to par. I&apos;m{" "}
+                    . I&apos;m up to date with the latest and greatest web
+                    features and can steadily navigate its current chaotic
+                    waters. I enjoy deep dives into topics I&apos;m interested
+                    in and keeping abreast of the work of top-skilled
+                    programmers in the field. My weapon of choice is{" "}
+                    <span className="font-bold">React</span>. I&apos;ve been
+                    enjoying its&apos; recent takeover of the server side with{" "}
+                    <span className="font-bold">Next.js</span> to build{" "}
+                    <span className="font-bold">full-stack</span> applications
+                    using <span className="font-bold">Typescript</span> to my
+                    advantage. This web development gallery will show you that
+                    my skills are up to par. I&apos;m{" "}
                     <span className="font-bold">the solutionist</span> to your
                     issues, delivering{" "}
                     <span className="font-bold">real value</span> where it

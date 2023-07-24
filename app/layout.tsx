@@ -1,8 +1,8 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "The Bloggy Blog",
-  description: "The Bloggy Blog is cool",
+  title: "Dev Gallery",
+  description: "Michael's web development gallery",
 };
 
 export default function RootLayout({

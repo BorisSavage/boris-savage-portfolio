@@ -62,11 +62,10 @@ export default function ExpCard({
       onPointerLeave={() => setIsPointing(false)}
       onTouchEnd={() => setIsPointing(false)}
       className={cn(
-        "group relative h-[95%] w-[100%] min-w-[300px] flex-shrink-0 cursor-grab snap-center rounded-bl-[6rem] rounded-br-sm rounded-tl-sm rounded-tr-[6rem]",
+        "group relative h-[90%] w-[100%] min-w-[300px] flex-shrink-0 rounded-bl-[6rem] rounded-br-sm rounded-tl-sm rounded-tr-[6rem]",
         "sm:w-[550px]",
         "lg:w-[600px]",
-        "xl:w-[90%] xl:max-w-[900px]",
-        "active:cursor-grabbing"
+        "xl:w-[90%] xl:max-w-[900px]"
       )}
     >
       <div
@@ -153,12 +152,12 @@ export default function ExpCard({
         {image && (
           <Image
             src={image}
-            alt="that's me"
+            alt="company logo"
             className={cn(
-              "mx-auto h-20 w-20 rounded-full object-cover object-center opacity-80 drop-shadow-2xl",
-              "sm:h-40 sm:w-40",
-              // "lg:h-40 lg:w-40",
-              "xl:h-48 xl:w-48"
+              "mx-auto w-44 overflow-visible rounded-bl-lg rounded-br-sm rounded-tl-sm rounded-tr-lg border bg-white object-contain object-center p-2 opacity-80 drop-shadow-2xl",
+              "sm:w-60",
+              "lg:h-60 lg:w-60 lg:rounded-full"
+              // "xl:h-48 xl:w-48"
             )}
           />
         )}
