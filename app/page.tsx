@@ -204,12 +204,12 @@ export default function Page() {
                 <About />
               </Section>
 
-              <Section id="experience" turnOffDots={isCardSection}>
+              <Section id="projects" turnOffDots={isCardSection}>
                 <div
-                  ref={experienceRef}
-                  className="absolute top-1/2 h-[80%] w-full -translate-y-1/2"
+                  ref={projectsRef}
+                  className="absolute top-1/2 h-[80%] w-full -translate-y-1/2 "
                 />
-                <Experience />
+                <Projects />
               </Section>
 
               <Section id="skills">
@@ -220,12 +220,12 @@ export default function Page() {
                 <Skills />
               </Section>
 
-              <Section id="projects" turnOffDots={isCardSection}>
+              <Section id="experience" turnOffDots={isCardSection}>
                 <div
-                  ref={projectsRef}
-                  className="absolute top-1/2 h-[80%] w-full -translate-y-1/2 "
+                  ref={experienceRef}
+                  className="absolute top-1/2 h-[80%] w-full -translate-y-1/2"
                 />
-                <Projects />
+                <Experience />
               </Section>
 
               <Section id="contact">

@@ -102,9 +102,9 @@ export default function Hero() {
           )}
         >
           <NavButton text="About" index={1} />
-          <NavButton text="Experience" index={2} />
+          <NavButton text="Projects" index={2} />
           <NavButton text="Skills" index={3} />
-          <NavButton text="Projects" index={4} />
+          <NavButton text="Experience" index={4} />
         </div>
       </div>
     </div>

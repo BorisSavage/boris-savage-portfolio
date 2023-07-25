@@ -26,9 +26,9 @@ const BAR_SIZE = 5;
 const sections = [
   "hi!",
   "about",
-  "experience",
-  "skills",
   "projects",
+  "skills",
+  "experience",
   "contact me!",
 ];
 

@@ -27,7 +27,7 @@ export default function Experience() {
       <ExpCard image={alpiLogo}>
         <div className="w-fit rounded-tr-[3rem] bg-mossy_glen-950/20 pb-1">
           <h4 className="inline-block w-fit pr-8 text-2xl font-light text-sunlit_meadow-200 drop-shadow sm:text-4xl">
-            Software Engineer
+            IT Specialist
           </h4>
           <h5 className="mt-1 text-lg font-bold text-misty_mountains-400 drop-shadow sm:text-2xl">
             ALPI MODA
@@ -42,7 +42,7 @@ export default function Experience() {
             "sm:text-base"
           )}
         >
-          September 2022 - Present
+          July 2022 - Present
         </p>
         <ul
           className={cn(
@@ -52,19 +52,22 @@ export default function Experience() {
           )}
         >
           <li>
-            Developed a visually appealing React headless WordPress landing page
-            for the company's e-commerce website, showcasing the brand identity
-            and products effectively.{" "}
+            Worked closely with colleagues from different departments to gather
+            requirements, identify pain points, and propose technical solutions
+            that significantly improved the overall website performance and user
+            experience.
           </li>
           <li>
             Utilized web analytics tools to track website performance, user
-            behavior, and conversion rates, providing actionable insights to
-            drive continuous improvements and meet business objectives.{" "}
+            behavior, and conversion rates, providing actionable insights that
+            led to a 20% decrease in bounce rate and a 10% increase in sales
+            revenue.
           </li>
           <li>
-            Led the migration process from an outdated e-commerce website to a
-            more advanced and scalable IdoSell solution, ensuring a seamless
-            transition and minimizing disruption to the business operations.{" "}
+            Led the successful migration process from an outdated e-commerce
+            website to a more advanced and scalable IdoSell solution, resulting
+            in a 30% reduction in page load times and a seamless user experience
+            for customers.
           </li>
         </ul>
       </ExpCard>
