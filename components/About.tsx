@@ -36,16 +36,12 @@ export default function About() {
   const animateRef = useRef(null);
   const isInView = useInView(animateRef, { amount: 0.2 });
 
-  //const { scrollRef, isCarouselScrolling } = useScrollHandler();
-
   const indexRef = useRef(3);
 
   const handleAnimationStart = () => {
     if (!isAnimating) {
       console.log("HANDLE ANIME START");
       setIsAnimating(true);
-      // setTimer(-(timer - Date.now()));
-      // console.log("TIME SINCE LAST RUN: ");
       indexRef.current < pictures.length - 1
         ? (indexRef.current = indexRef.current + 2)
         : (indexRef.current = 3);
@@ -55,16 +51,6 @@ export default function About() {
   const handlePointerEnter = () => {
     if (hasRun) handleAnimationStart();
   };
-
-  // useEffect(() => {
-  //   if (!hasRun && !isAnimating && isInView) {
-  //     setTimeout(() => {
-  //       if (!hasRun) {
-  //         handleAnimationStart();
-  //       }
-  //     }, 1050);
-  //   }
-  // }, [isInView]);
 
   useEffect(() => {
     if (isInView && !hasRun) {
@@ -265,20 +251,8 @@ export default function About() {
               )}
             >
               <div
-                //ref={scrollRef}
                 className={cn(
-                  // "max-h-[40dvh]",
                   "relative overflow-auto text-justify scrollbar scrollbar-w-1"
-
-                  // "sm:pr-2",
-                  // "md:max-h-[40dvh]",
-                  // "xl:max-h-[40dvh]",
-                  // {
-                  //   "scrollbar-track-mossy_glen-500/0 scrollbar-thumb-mossy_glen-500/0":
-                  //     isCarouselScrolling,
-                  //   "scrollbar-track-mossy_glen-500/10 scrollbar-thumb-mossy_glen-500/20":
-                  //     !isCarouselScrolling,
-                  // }
                 )}
               >
                 <p
@@ -308,8 +282,8 @@ export default function About() {
                       Forensic Chemistry and Toxicology
                     </span>{" "}
                     I started coding even before the start of my CS degree and
-                    already have a year of professional experience as a
-                    developer. I&apos;m{" "}
+                    already have a year of professional experience in the
+                    industry. I&apos;m{" "}
                     <span className="font-bold">obsessed</span> with web dev,
                     and I aspire to work with the best. I&apos;m distinguished
                     by{" "}
