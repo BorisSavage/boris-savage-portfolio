@@ -40,7 +40,6 @@ export default function About() {
 
   const handleAnimationStart = () => {
     if (!isAnimating) {
-      console.log("HANDLE ANIME START");
       setIsAnimating(true);
       indexRef.current < pictures.length - 1
         ? (indexRef.current = indexRef.current + 2)
@@ -56,7 +55,6 @@ export default function About() {
     if (isInView && !hasRun) {
       setTimeout(() => {
         if (isInView && !hasRun) {
-          console.log("USE EFFEC CAUSED BELOW:");
           handleAnimationStart();
           setHasRun(true);
         }
